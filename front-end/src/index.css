@@ -1,59 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
-	--light-black: #223030;
-	--brown: #523d35;
-	--green-grey: #959d90;
-	--beige: #bba58f;
-	--light-beige: #e8d9cd;
-	--off-white: #efefe9;
 
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
-
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: var(--light-beige);
-
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-a {
-	font-weight: 500;
-	color: #646cff;
-	text-decoration: inherit;
-}
-a:hover {
-	color: #535bf2;
-}
-
-body {
-	margin: 0;
-	display: flex;
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh;
-}
-
-h1 {
-	font-size: 3.2em;
-	line-height: 1.1;
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 5rem;
 	}
-	a:hover {
-		color: #747bff;
+
+	body {
+		@apply bg-surface text-text font-inter antialiased;
+		margin: 0;
+		min-height: 100vh;
 	}
-	button {
-		background-color: #f9f9f9;
+
+	::selection {
+		@apply bg-accent/30 text-accent-warm;
+	}
+
+	::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	::-webkit-scrollbar-track {
+		@apply bg-surface;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply bg-accent/40 rounded-full;
+	}
+}
+
+@layer components {
+	.section-padding {
+		@apply px-6 md:px-12 lg:px-24 py-24 md:py-32;
+	}
+
+	.gradient-text {
+		@apply bg-gradient-to-r from-accent to-accent-warm bg-clip-text text-transparent;
 	}
 }
