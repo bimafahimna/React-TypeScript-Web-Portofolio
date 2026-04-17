@@ -18,7 +18,7 @@ const Hero = () => {
 					transition={{ duration: 0.6, delay: 0.2 }}
 					className="text-accent text-subhead mb-6"
 				>
-					Howdy! Meet your developer,
+					Hi, I'm Bima!
 				</motion.p>
 
 				<motion.h1
