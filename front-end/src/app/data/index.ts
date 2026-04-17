@@ -12,6 +12,21 @@ export interface Experience {
 	period: string;
 }
 
+export interface FormalEducation {
+	institution: string;
+	degree: string;
+	field: string;
+	period: string;
+	gpa?: string;
+}
+
+export interface InformalEducation {
+	title: string;
+	provider: string;
+	period: string;
+	credential?: string;
+}
+
 export interface SocialLink {
 	label: string;
 	url: string;
@@ -20,57 +35,42 @@ export interface SocialLink {
 
 export const projects: Project[] = [
 	{
-		title: 'Project Alpha',
-		tags: ['Branding', 'Web Design', 'Development'],
-		description: 'A complete brand identity and web platform for a SaaS startup.',
-	},
-	{
-		title: 'Momentum',
-		tags: ['Web Design', 'Illustrations', 'Development'],
-		description: 'Product landing page with custom illustrations and micro-interactions.',
-	},
-	{
-		title: 'Vantage',
-		tags: ['Web Design', 'Development'],
-		description: 'Dashboard interface for a data analytics platform.',
-	},
-	{
-		title: 'Horizon',
-		tags: ['Web Design', 'Illustrations'],
-		description: 'Marketing website with a bold visual direction.',
-	},
-	{
-		title: 'Nexus',
-		tags: ['Branding', 'Product Refresh', 'Web Design'],
-		description: 'Complete brand refresh and website redesign for a growing fintech.',
-	},
-	{
-		title: 'Prism',
-		tags: ['Branding', 'Illustrations'],
-		description: 'Visual identity system with custom iconography.',
-	},
+		title: 'Medicine E-Commerce',
+		tags: ['Front-End', 'Back-End', 'Web Development', 'Next.js', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'AWS', 'CI/CD'],
+		description: 'A complete e-commerce platform for a medicine store.',
+		note: 'Built at Company X',
+		image: '',
+	}
 ];
 
 export const experiences: Experience[] = [
 	{
-		company: 'Company One',
-		role: 'Frontend Developer',
-		period: '2023 — Present',
+		company: 'Tiket.com',
+		role: 'Backend Engineer',
+		period: '2024 — Present',
 	},
 	{
-		company: 'Company Two',
-		role: 'Web Developer',
-		period: '2022 — 2023',
-	},
+		company: 'Shopee',
+		role: 'Full Stack Engineer Intern',
+		period: '2024',
+	}
+];
+
+export const formalEducation: FormalEducation[] = [
 	{
-		company: 'Company Three',
-		role: 'Junior Developer',
-		period: '2021 — 2022',
+		institution: 'Bandung Institute of Technology',
+		degree: 'Bachelor of Science',
+		field: 'Oceanography',
+		period: '2019 — 2023',
+		gpa: '3.21 / 4.00',
 	},
+];
+
+export const informalEducation: InformalEducation[] = [
 	{
-		company: 'Freelance',
-		role: 'Designer & Developer',
-		period: '2020 — 2021',
+		title: 'Web Development Course',
+		provider: 'Provider Name',
+		period: '2023',
 	},
 ];
 
@@ -84,6 +84,7 @@ export const socialLinks: SocialLink[] = [
 export const navLinks = [
 	{ label: 'Work', href: '#work' },
 	{ label: 'Story', href: '#story' },
+	{ label: 'Academic', href: '#academic' },
 	{ label: 'Process', href: '#process' },
 	{ label: 'Connect', href: '#connect' },
 ];

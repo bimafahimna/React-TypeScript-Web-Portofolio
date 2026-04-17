@@ -4,6 +4,7 @@ import Work from '../sections/Work';
 import Experience from '../sections/Experience';
 import Story from '../sections/Story';
 import Process from '../sections/Process';
+import Academic from '../sections/Academic';
 import Connect from '../sections/Connect';
 
 const MainLayout = () => {
@@ -14,6 +15,7 @@ const MainLayout = () => {
 				<Hero />
 				<Work />
 				<Experience />
+				<Academic />
 				<Story />
 				<Process />
 				<Connect />
