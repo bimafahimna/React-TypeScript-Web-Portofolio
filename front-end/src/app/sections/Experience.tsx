@@ -40,6 +40,23 @@ const Experience = () => {
 									{exp.company}
 								</h3>
 								<p className="text-sm text-text-muted mt-1">{exp.role}</p>
+								{exp.location && (
+									<p className="flex items-center gap-1 text-xs text-text-muted/70 mt-1">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 24 24"
+											fill="currentColor"
+											className="w-3 h-3 shrink-0"
+										>
+											<path
+												fillRule="evenodd"
+												d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.07-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-2.003 3.5-4.697 3.5-8.327a8 8 0 10-16 0c0 3.63 1.556 6.326 3.5 8.327a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.144.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z"
+												clipRule="evenodd"
+											/>
+										</svg>
+										{exp.location}
+									</p>
+								)}
 							</div>
 							<span className="text-sm text-text-muted font-mono">
 								{exp.period}

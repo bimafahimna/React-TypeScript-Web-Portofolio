@@ -10,6 +10,7 @@ export interface Experience {
 	company: string;
 	role: string;
 	period: string;
+	location?: string;
 }
 
 export interface FormalEducation {
@@ -18,6 +19,7 @@ export interface FormalEducation {
 	field: string;
 	period: string;
 	gpa?: string;
+	location?: string;
 }
 
 export interface InformalEducation {
@@ -25,6 +27,7 @@ export interface InformalEducation {
 	provider: string;
 	period: string;
 	credential?: string;
+	location?: string;
 }
 
 export interface Hobby {
@@ -40,27 +43,21 @@ export interface SocialLink {
 	category: string;
 }
 
-export const projects: Project[] = [
-	{
-		title: 'Medicine E-Commerce',
-		tags: ['Front-End', 'Back-End', 'Web Development', 'Next.js', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'AWS', 'CI/CD'],
-		description: 'A complete e-commerce platform for a medicine store.',
-		note: 'Built at Company X',
-		image: '',
-	}
-];
+export const projects: Project[] = [];
 
 export const experiences: Experience[] = [
 	{
 		company: 'Tiket.com',
 		role: 'Backend Engineer',
 		period: '2024 — Present',
+		location: 'Jakarta, Indonesia',
 	},
 	{
 		company: 'Shopee',
-		role: 'Full Stack Engineer Intern',
+		role: 'Full-Stack Engineer Intern',
 		period: '2024',
-	}
+		location: 'Jakarta, Indonesia',
+	},
 ];
 
 export const formalEducation: FormalEducation[] = [
@@ -70,38 +67,24 @@ export const formalEducation: FormalEducation[] = [
 		field: 'Oceanography',
 		period: '2019 — 2023',
 		gpa: '3.21 / 4.00',
+		location: 'Bandung, Indonesia',
 	},
 ];
 
 export const informalEducation: InformalEducation[] = [
 	{
-		title: 'Web Development Course',
-		provider: 'Provider Name',
-		period: '2023',
+		title: 'Full-Stack Web Development Course',
+		provider: 'Sanberhub',
+		period: '2023 - 2024',
+		location: 'Bandung, Indonesia',
 	},
 ];
 
 export const hobbies: Hobby[] = [
 	{
-		title: 'Hiking',
-		description: 'Exploring trails and mountain peaks on weekends.',
-		image: '',
-		span: 'tall',
-	},
-	{
-		title: 'Photography',
-		description: 'Capturing moments through the lens.',
-		image: '',
-	},
-	{
-		title: 'Cycling',
-		description: 'Long rides through the countryside.',
-		image: '',
-	},
-	{
-		title: 'Cooking',
-		description: 'Experimenting with recipes from around the world.',
-		image: '',
+		title: 'Diving',
+		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
+		image: '../public/hobby/underwater_temple.JPG',
 		span: 'wide',
 	},
 ];
