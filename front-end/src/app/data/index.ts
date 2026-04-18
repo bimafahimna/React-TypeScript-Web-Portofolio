@@ -86,25 +86,9 @@ export const informalEducation: InformalEducation[] = [
 
 export const hobbies: Hobby[] = [
 	{
-		title: 'Hiking',
-		description: 'Exploring trails and mountain peaks on weekends.',
-		image: '',
-		span: 'tall',
-	},
-	{
-		title: 'Photography',
-		description: 'Capturing moments through the lens.',
-		image: '',
-	},
-	{
-		title: 'Cycling',
-		description: 'Long rides through the countryside.',
-		image: '',
-	},
-	{
-		title: 'Cooking',
-		description: 'Experimenting with recipes from around the world.',
-		image: '',
+		title: 'Diving',
+		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
+		image: '../public/hobby/underwater_temple.JPG',
 		span: 'wide',
 	},
 ];
