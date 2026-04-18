@@ -1,21 +1,37 @@
 /** @type {import('tailwindcss').Config} */
-const defualtTheme = require('tailwindcss/defaultTheme');
 
 export default {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
 		extend: {
 			fontFamily: {
-				roboto: ['"Roboto Slab"', 'sans-serif'],
+				syne: ['Syne', 'sans-serif'],
+				inter: ['Inter', 'sans-serif'],
 			},
-			// earthy color palette
 			colors: {
-				'light-black': '#223030',
-				brown: '#523D35',
-				'green-grey': '#959D90',
-				beige: '#BBA58F',
-				'light-beige': '#E8D9CD',
-				'off-white': '#EFEFE9',
+				surface: {
+					DEFAULT: '#0a0a0a',
+					light: '#141414',
+					lighter: '#1e1e1e',
+				},
+				accent: {
+					DEFAULT: '#BBA58F',
+					muted: '#959D90',
+					warm: '#E8D9CD',
+				},
+				text: {
+					DEFAULT: '#EFEFE9',
+					muted: '#8a8a80',
+					dark: '#223030',
+				},
+			},
+			fontSize: {
+				display: ['clamp(3rem, 8vw, 7rem)', { lineHeight: '1.05', fontWeight: '700' }],
+				headline: ['clamp(2rem, 4vw, 3.5rem)', { lineHeight: '1.1', fontWeight: '700' }],
+				subhead: ['clamp(1.125rem, 2vw, 1.5rem)', { lineHeight: '1.4', fontWeight: '400' }],
+			},
+			borderRadius: {
+				pill: '9999px',
 			},
 		},
 	},
