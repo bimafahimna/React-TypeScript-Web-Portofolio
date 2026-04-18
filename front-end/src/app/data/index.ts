@@ -27,6 +27,13 @@ export interface InformalEducation {
 	credential?: string;
 }
 
+export interface Hobby {
+	title: string;
+	description: string;
+	image: string;
+	span?: 'tall' | 'wide';
+}
+
 export interface SocialLink {
 	label: string;
 	url: string;
@@ -74,17 +81,41 @@ export const informalEducation: InformalEducation[] = [
 	},
 ];
 
+export const hobbies: Hobby[] = [
+	{
+		title: 'Hiking',
+		description: 'Exploring trails and mountain peaks on weekends.',
+		image: '',
+		span: 'tall',
+	},
+	{
+		title: 'Photography',
+		description: 'Capturing moments through the lens.',
+		image: '',
+	},
+	{
+		title: 'Cycling',
+		description: 'Long rides through the countryside.',
+		image: '',
+	},
+	{
+		title: 'Cooking',
+		description: 'Experimenting with recipes from around the world.',
+		image: '',
+		span: 'wide',
+	},
+];
+
 export const socialLinks: SocialLink[] = [
 	{ label: 'GitHub', url: 'https://github.com', category: 'Code' },
 	{ label: 'LinkedIn', url: 'https://linkedin.com', category: 'Social' },
-	{ label: 'Twitter', url: 'https://x.com', category: 'Insights' },
-	{ label: 'Dribbble', url: 'https://dribbble.com', category: 'Design' },
 ];
 
 export const navLinks = [
 	{ label: 'Work', href: '#work' },
 	{ label: 'Story', href: '#story' },
 	{ label: 'Academic', href: '#academic' },
+	{ label: 'Hobbies', href: '#hobbies' },
 	{ label: 'Process', href: '#process' },
 	{ label: 'Connect', href: '#connect' },
 ];
