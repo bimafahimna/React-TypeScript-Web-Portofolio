@@ -84,7 +84,7 @@ export const hobbies: Hobby[] = [
 	{
 		title: 'Diving',
 		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
-		image: '../public/hobby/underwater_temple.JPG',
+		image: '/hobby/underwater_temple.JPG',
 		span: 'wide',
 	},
 ];
