@@ -10,6 +10,7 @@ export interface Experience {
 	company: string;
 	role: string;
 	period: string;
+	location?: string;
 }
 
 export interface FormalEducation {
@@ -55,12 +56,14 @@ export const experiences: Experience[] = [
 		company: 'Tiket.com',
 		role: 'Backend Engineer',
 		period: '2024 — Present',
+		location: 'Jakarta, Indonesia',
 	},
 	{
 		company: 'Shopee',
-		role: 'Full Stack Engineer Intern',
+		role: 'Full-Stack Engineer Intern',
 		period: '2024',
-	}
+		location: 'Jakarta, Indonesia',
+	},
 ];
 
 export const formalEducation: FormalEducation[] = [
