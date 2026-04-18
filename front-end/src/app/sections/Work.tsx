@@ -24,7 +24,7 @@ const Work = () => {
 						transition={{ duration: 0.5, delay: 0.1 }}
 						className="mt-3 text-text-muted text-lg"
 					>
-						from 2020 &apos;til today
+						from 2023 &apos;til today
 					</motion.p>
 				</div>
 
@@ -41,7 +41,7 @@ const Work = () => {
 					transition={{ duration: 0.5, delay: 0.3 }}
 					className="mt-16 text-center text-text-muted text-lg"
 				>
-					New cases are on the way, <span className="font-medium text-text">slowly but surely</span>
+					New cases are on the way, <span className="font-medium text-text">slowly but surely! :D</span>
 				</motion.p>
 			</div>
 		</AnimatedSection>

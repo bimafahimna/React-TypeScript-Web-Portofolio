@@ -41,13 +41,13 @@ export interface SocialLink {
 }
 
 export const projects: Project[] = [
-	{
-		title: 'Medicine E-Commerce',
-		tags: ['Front-End', 'Back-End', 'Web Development', 'Next.js', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'AWS', 'CI/CD'],
-		description: 'A complete e-commerce platform for a medicine store.',
-		note: 'Built at Company X',
-		image: '',
-	}
+	// {
+	// 	title: 'Medicine E-Commerce',
+	// 	tags: ['Front-End', 'Back-End', 'Web Development', 'Next.js', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'AWS', 'CI/CD'],
+	// 	description: 'A complete e-commerce platform for a medicine store.',
+	// 	note: 'Built at Company X',
+	// 	image: '',
+	// }
 ];
 
 export const experiences: Experience[] = [

@@ -18,7 +18,7 @@ const Hero = () => {
 					transition={{ duration: 0.6, delay: 0.2 }}
 					className="text-accent text-subhead mb-6"
 				>
-					Hi, I'm Bima!
+					Hi, I'm Bima your go to developer!
 				</motion.p>
 
 				<motion.h1
@@ -27,10 +27,10 @@ const Hero = () => {
 					transition={{ duration: 0.7, delay: 0.4 }}
 					className="font-syne text-display"
 				>
-					crafting{' '}
-					<span className="gradient-text">modern web</span>
+					Crafting{' '}
+					<span className="gradient-text">Modern Web</span>
 					<br />
-					experiences.
+					Experiences.
 				</motion.h1>
 
 				<motion.p
@@ -40,7 +40,7 @@ const Hero = () => {
 					className="mt-8 max-w-xl text-subhead text-text-muted"
 				>
 					Building performant, beautiful interfaces for startups and teams
-					who care about the details.
+					who care about the details and quality of work.
 				</motion.p>
 
 				<motion.div

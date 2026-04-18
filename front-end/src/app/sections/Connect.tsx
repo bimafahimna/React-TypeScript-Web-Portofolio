@@ -3,6 +3,7 @@ import { socialLinks } from '../data';
 import AnimatedSection from '../components/AnimatedSection';
 
 const Connect = () => {
+	const email = `b.fahimna@gmail.com`
 	return (
 		<AnimatedSection id="connect" className="section-padding">
 			<div className="max-w-4xl mx-auto text-center">
@@ -17,7 +18,7 @@ const Connect = () => {
 				</motion.p>
 
 				<motion.a
-					href="mailto:hello@example.com"
+					href={`mailto:${email}`}
 					initial={{ opacity: 0, scale: 0.9 }}
 					whileInView={{ opacity: 1, scale: 1 }}
 					viewport={{ once: true }}
@@ -37,10 +38,10 @@ const Connect = () => {
 					className="mt-8"
 				>
 					<a
-						href="mailto:hello@example.com"
+						href={`mailto:${email}`}
 						className="text-text-muted hover:text-accent transition-colors underline underline-offset-4"
 					>
-						hello@example.com
+						{email}
 					</a>
 				</motion.p>
 
