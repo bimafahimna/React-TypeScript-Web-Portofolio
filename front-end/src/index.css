@@ -12,14 +12,16 @@
 		@apply bg-surface text-text font-inter antialiased;
 		margin: 0;
 		min-height: 100vh;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	::selection {
-		@apply bg-accent/30 text-accent-warm;
+		@apply bg-accent/15 text-accent;
 	}
 
 	::-webkit-scrollbar {
-		width: 6px;
+		width: 4px;
 	}
 
 	::-webkit-scrollbar-track {
@@ -27,7 +29,7 @@
 	}
 
 	::-webkit-scrollbar-thumb {
-		@apply bg-accent/40 rounded-full;
+		@apply bg-accent/30 rounded-full;
 	}
 }
 
@@ -36,7 +38,8 @@
 		@apply px-6 md:px-12 lg:px-24 py-24 md:py-32;
 	}
 
+	/* Minimalist: a single accent color, no gradient flourish. */
 	.gradient-text {
-		@apply bg-gradient-to-r from-accent to-accent-warm bg-clip-text text-transparent;
+		@apply text-accent;
 	}
 }
