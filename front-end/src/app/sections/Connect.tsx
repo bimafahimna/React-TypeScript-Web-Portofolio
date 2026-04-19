@@ -14,7 +14,7 @@ const Connect = () => {
 					transition={{ duration: 0.5 }}
 					className="text-text-muted text-lg mb-6"
 				>
-					Tap this &apos;tiny&apos; button to start your next project
+					Tap this <span className='gradient-text '>tiny</span> button to start your next project
 				</motion.p>
 
 				<motion.a
@@ -25,7 +25,8 @@ const Connect = () => {
 					transition={{ duration: 0.5, delay: 0.1 }}
 					whileHover={{ scale: 1.05 }}
 					whileTap={{ scale: 0.95 }}
-					className="inline-block px-16 py-6 text-2xl font-syne font-bold bg-accent text-text-dark rounded-pill hover:bg-accent-warm transition-colors"
+					className="inline-block px-16 py-6 text-2xl font-syne font-bold bg-accent text-text-dark 
+					rounded-pill hover:bg-accent-warm transition-colors"
 				>
 					Connect
 				</motion.a>
