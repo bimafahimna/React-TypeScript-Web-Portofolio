@@ -12,13 +12,13 @@ const steps = [
 		number: '02',
 		title: 'Design & Prototype',
 		description:
-			'From wireframes to high-fidelity mockups, I iterate quickly with your feedback baked in.',
+			'From wireframes to high-fidelity mockups, I iterate thoughtfully with your feedback baked in.',
 	},
 	{
 		number: '03',
 		title: 'Develop',
 		description:
-			'Clean, performant code using modern tools. Every detail from design is faithfully translated.',
+			'Clean, performant code using modern tools. Every detail from design is carefully translated.',
 	},
 	{
 		number: '04',
