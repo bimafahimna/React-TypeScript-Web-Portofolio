@@ -84,7 +84,7 @@ export const hobbies: Hobby[] = [
 	{
 		title: 'Diving',
 		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
-		image: '../public/hobby/underwater_temple.JPG',
+		image: '/hobby/underwater_temple.JPG',
 		span: 'wide',
 	},
 ];
@@ -92,6 +92,7 @@ export const hobbies: Hobby[] = [
 export const socialLinks: SocialLink[] = [
 	{ label: 'GitHub', url: 'https://github.com', category: 'Code' },
 	{ label: 'LinkedIn', url: 'https://linkedin.com', category: 'Social' },
+	{ label: 'WhatsApp', url: 'https://wa.me/6282110201566', category: 'WhatsApp' },
 ];
 
 export const navLinks = [
