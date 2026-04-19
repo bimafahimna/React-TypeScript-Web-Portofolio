@@ -92,6 +92,7 @@ export const hobbies: Hobby[] = [
 export const socialLinks: SocialLink[] = [
 	{ label: 'GitHub', url: 'https://github.com', category: 'Code' },
 	{ label: 'LinkedIn', url: 'https://linkedin.com', category: 'Social' },
+	{ label: 'WhatsApp', url: 'https://wa.me/6282110201566', category: 'WhatsApp' },
 ];
 
 export const navLinks = [
