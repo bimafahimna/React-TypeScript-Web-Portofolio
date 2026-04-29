@@ -33,7 +33,10 @@ export interface InformalEducation {
 export interface Hobby {
 	title: string;
 	description: string;
-	image: string;
+	/** Cover + default when `images` is omitted */
+	image?: string;
+	/** Multiple photos; first item is used as the grid cover. Carousel only when length > 1. */
+	images?: string[];
 	span?: 'tall' | 'wide';
 }
 
@@ -84,7 +87,7 @@ export const hobbies: Hobby[] = [
 	{
 		title: 'Diving',
 		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
-		image: '/hobby/underwater_temple.JPG',
+		images: ['/hobby/underwater_temple.JPG', '/hobby/uw_selfie.png'],
 		span: 'wide',
 	},
 ];
