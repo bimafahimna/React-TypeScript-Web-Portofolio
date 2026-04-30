@@ -22,7 +22,7 @@ export interface FormalEducation {
 	location?: string;
 }
 
-export interface InformalEducation {
+export interface NonformalEducation {
 	title: string;
 	provider: string;
 	period: string;
@@ -46,7 +46,15 @@ export interface SocialLink {
 	category: string;
 }
 
-export const projects: Project[] = [];
+export const projects: Project[] = [
+	{
+		title: "SaaS Analytic Dashboard",
+		tags:["React","TypeScript","Next.JS", "PostgreSQL","Prisma"],
+		image:"/project/SaaS_dashboard.png",
+		description: "A modern SaaS Analytics Dashboard built using React and Next.js, featuring interactive data visualization, user-friendly UI, and customizable widgets to help businesses monitor and analyze key metrics effectively.",
+		note:"Still a work in progress"
+	},
+];
 
 export const experiences: Experience[] = [
 	{
@@ -74,7 +82,7 @@ export const formalEducation: FormalEducation[] = [
 	},
 ];
 
-export const informalEducation: InformalEducation[] = [
+export const informalEducation: NonformalEducation[] = [
 	{
 		title: 'Full-Stack Web Development Course',
 		provider: 'Sanberhub',
