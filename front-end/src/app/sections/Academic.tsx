@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { formalEducation, informalEducation } from '../data';
+import { formalEducation, informalEducation as nonformalEducation } from '../data';
 import AnimatedSection from '../components/AnimatedSection';
 
 const Academic = () => {
@@ -79,10 +79,10 @@ const Academic = () => {
 					transition={{ duration: 0.4 }}
 					className="font-syne text-2xl font-bold text-text mb-6"
 				>
-					Informal
+					Non-Formal
 				</motion.h3>
 				<div className="space-y-0">
-					{informalEducation.map((item, i) => (
+					{nonformalEducation.map((item, i) => (
 						<motion.div
 							key={item.title}
 							initial={{ opacity: 0, x: -20 }}

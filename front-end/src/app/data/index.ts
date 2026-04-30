@@ -22,7 +22,7 @@ export interface FormalEducation {
 	location?: string;
 }
 
-export interface InformalEducation {
+export interface NonformalEducation {
 	title: string;
 	provider: string;
 	period: string;
@@ -33,7 +33,10 @@ export interface InformalEducation {
 export interface Hobby {
 	title: string;
 	description: string;
-	image: string;
+	/** Cover + default when `images` is omitted */
+	image?: string;
+	/** Multiple photos; first item is used as the grid cover. Carousel only when length > 1. */
+	images?: string[];
 	span?: 'tall' | 'wide';
 }
 
@@ -43,7 +46,15 @@ export interface SocialLink {
 	category: string;
 }
 
-export const projects: Project[] = [];
+export const projects: Project[] = [
+	{
+		title: "SaaS Analytic Dashboard",
+		tags:["React","TypeScript","Next.JS", "PostgreSQL","Prisma"],
+		image:"/project/SaaS_dashboard.png",
+		description: "A modern SaaS Analytics Dashboard built using React and Next.js, featuring interactive data visualization, user-friendly UI, and customizable widgets to help businesses monitor and analyze key metrics effectively.",
+		note:"Still a work in progress"
+	},
+];
 
 export const experiences: Experience[] = [
 	{
@@ -71,7 +82,7 @@ export const formalEducation: FormalEducation[] = [
 	},
 ];
 
-export const informalEducation: InformalEducation[] = [
+export const informalEducation: NonformalEducation[] = [
 	{
 		title: 'Full-Stack Web Development Course',
 		provider: 'Sanberhub',
@@ -84,7 +95,7 @@ export const hobbies: Hobby[] = [
 	{
 		title: 'Diving',
 		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
-		image: '/hobby/underwater_temple.JPG',
+		images: ['/hobby/underwater_temple.JPG', '/hobby/uw_selfie.png'],
 		span: 'wide',
 	},
 ];
