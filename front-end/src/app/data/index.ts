@@ -1,9 +1,15 @@
+export type ProjectMedia =
+	| { kind: 'image'; src: string }
+	| { kind: 'video'; src: string; poster?: string }
+	| { kind: 'youtube'; videoId: string; poster?: string };
+
 export interface Project {
 	title: string;
 	tags: string[];
 	description?: string;
 	note?: string;
-	image?: string;
+	link?: string;
+	media?: ProjectMedia;
 }
 
 export interface Experience {
@@ -48,11 +54,12 @@ export interface SocialLink {
 
 export const projects: Project[] = [
 	{
-		title: "SaaS Analytic Dashboard",
-		tags:["React","TypeScript","Next.JS", "PostgreSQL","Prisma"],
-		image:"/project/SaaS_dashboard.png",
-		description: "A modern SaaS Analytics Dashboard built using React and Next.js, featuring interactive data visualization, user-friendly UI, and customizable widgets to help businesses monitor and analyze key metrics effectively.",
-		note:"Still a work in progress"
+		title: 'SaaS Analytic Dashboard',
+		tags: ['React', 'TypeScript', 'Next.JS', 'PostgreSQL', 'Prisma'],
+		media: { kind: 'image', src: '/project/SaaS_dashboard.png' },
+		description:
+			'A modern SaaS Analytics Dashboard built using React and Next.js, featuring interactive data visualization, user-friendly UI, and customizable widgets to help businesses monitor and analyze key metrics effectively.',
+		note: 'Still a work in progress',
 	},
 ];
 
