@@ -89,6 +89,7 @@ const ProjectMedia = forwardRef<HTMLVideoElement, ProjectMediaProps>(
 		if (mode === 'full') {
 			return (
 				<video
+					ref={videoRef}
 					src={media.src}
 					poster={media.poster}
 					controls

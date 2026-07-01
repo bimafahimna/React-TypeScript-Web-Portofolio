@@ -14,6 +14,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 	const [isHovering, setIsHovering] = useState(false);
 	const [supportsHoverPreview, setSupportsHoverPreview] = useState(false);
 	const videoRef = useRef<HTMLVideoElement>(null);
+	const modalVideoRef = useRef<HTMLVideoElement>(null);
 	const stopTimerRef = useRef<number | null>(null);
 
 	const isLocalVideo = project.media?.kind === 'video';
@@ -97,6 +98,15 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
 		window.addEventListener('keydown', onKeyDown);
 		return () => window.removeEventListener('keydown', onKeyDown);
+	}, [isOpen]);
+
+	useEffect(() => {
+		if (isOpen) return;
+		const v = modalVideoRef.current;
+		if (v) {
+			v.pause();
+			v.currentTime = 0;
+		}
 	}, [isOpen]);
 
 	const openModal = () => setIsOpen(true);
@@ -200,6 +210,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 						>
 							<div className="aspect-video bg-surface-lighter relative overflow-hidden">
 								<ProjectMedia
+									ref={modalVideoRef}
 									media={project.media}
 									mode="full"
 									fallbackIndex={index}
