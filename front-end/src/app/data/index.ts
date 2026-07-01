@@ -106,7 +106,7 @@ export const hobbies: Hobby[] = [
 		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
 		assets: [
 			{ kind: 'image', src: '/hobby/diving/underwater_temple.JPG' },
-			{ kind: "video", src: '/hobby/diving/underboat.MP4' },
+			{ kind: "video", src: '/hobby/diving/underboat.mov' },
 			{ kind: 'image', src: '/hobby/diving/uw_selfie.png' },
 		],
 		span: 'wide',
