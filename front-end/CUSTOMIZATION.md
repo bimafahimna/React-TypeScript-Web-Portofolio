@@ -53,8 +53,11 @@ front-end/src/
     ├── data/index.ts                 # ★ ALL your content lives here
     ├── components/
     │   ├── Navbar.tsx                # Floating pill navbar + mobile menu
-    │   ├── ProjectCard.tsx           # Individual project card with hover effects
-    │   └── AnimatedSection.tsx       # Reusable scroll-triggered fade wrapper
+    │   ├── ProjectCard.tsx           # Individual project card, modal, hover preview
+    │   ├── ProjectMedia.tsx          # Image / video / YouTube renderer for cards
+    │   ├── AnimatedSection.tsx       # Reusable scroll-triggered fade wrapper
+    │   └── icons/
+    │       └── ExternalLinkIcon.tsx  # Inline SVG external-link icon
     └── sections/
         ├── Hero.tsx                  # Full-screen intro with tagline & CTAs
         ├── Work.tsx                  # Project portfolio grid

@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import type { ProjectMedia as ProjectMediaData } from '../data';
 
-type Mode = 'thumb' | 'preview' | 'full';
+type Mode = 'thumb' | 'full';
 
 interface ProjectMediaProps {
 	media: ProjectMediaData | undefined;
@@ -86,36 +86,41 @@ const ProjectMedia = forwardRef<HTMLVideoElement, ProjectMediaProps>(
 			);
 		}
 
-		if (mode === 'full') {
+		if (media.kind === 'video') {
+			if (mode === 'full') {
+				return (
+					<video
+						ref={videoRef}
+						src={media.src}
+						poster={media.poster}
+						controls
+						autoPlay
+						playsInline
+						className="w-full h-full object-cover bg-black"
+					/>
+				);
+			}
+
+			const previewSrc = media.src.includes('#')
+				? media.src
+				: `${media.src}#t=0.1`;
+
 			return (
 				<video
 					ref={videoRef}
-					src={media.src}
+					src={previewSrc}
 					poster={media.poster}
-					controls
-					autoPlay
+					muted
 					playsInline
-					className="w-full h-full object-cover bg-black"
+					preload="metadata"
+					aria-hidden="true"
+					className="absolute inset-0 w-full h-full object-cover"
 				/>
 			);
 		}
 
-		const previewSrc = media.src.includes('#')
-			? media.src
-			: `${media.src}#t=0.1`;
-
-		return (
-			<video
-				ref={videoRef}
-				src={previewSrc}
-				poster={media.poster}
-				muted
-				playsInline
-				preload="metadata"
-				aria-hidden="true"
-				className="absolute inset-0 w-full h-full object-cover"
-			/>
-		);
+		const _exhaustive: never = media;
+		return _exhaustive;
 	}
 );
 

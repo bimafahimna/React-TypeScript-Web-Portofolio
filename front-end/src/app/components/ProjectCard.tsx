@@ -109,8 +109,14 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 		}
 	}, [isOpen]);
 
-	const openModal = () => setIsOpen(true);
-	const closeModal = () => setIsOpen(false);
+	const openModal = () => {
+		stopHoverPreview();
+		setIsOpen(true);
+	};
+	const closeModal = () => {
+		modalVideoRef.current?.pause();
+		setIsOpen(false);
+	};
 
 	const handleCardKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
 		if (event.key === 'Enter' || event.key === ' ') {
@@ -258,7 +264,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 							<button
 								type="button"
 								onClick={closeModal}
-								className="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-text-muted hover:text-text transition-colors"
+								className="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-text-muted hover:text-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
 								aria-label="Close project popup"
 							>
 								&times;
