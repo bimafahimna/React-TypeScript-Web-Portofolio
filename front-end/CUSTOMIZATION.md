@@ -96,17 +96,37 @@ export const projects: Project[] = [
     tags: ['React', 'TypeScript'],      // Technology/category tags
     description: 'What this project does...', // Short summary (optional)
     note: 'Built at Company X',         // Extra context shown in italic (optional)
-    image: '/path/to/screenshot.png',   // Image path (optional, not wired to UI yet)
+    link: 'https://myproject.com',      // External URL (optional; shows link icon on card)
+    media: { kind: 'image', src: '/project/screenshot.png' }, // See below (optional)
   },
   // Add, remove, or reorder entries freely
 ];
 ```
 
+**The `media` field** is a discriminated union — set exactly one of these shapes:
+
+```typescript
+// Static image
+media: { kind: 'image', src: '/project/screenshot.png' }
+
+// Self-hosted MP4 in public/project/
+// `poster` is optional; if omitted, the video's first frame is used
+media: { kind: 'video', src: '/project/demo.mp4', poster: '/project/demo_poster.jpg' }
+
+// YouTube embed (use the video ID from the URL, not the full URL)
+// `poster` overrides the auto-fetched YouTube thumbnail
+media: { kind: 'youtube', videoId: 'dQw4w9WgXcQ' }
+```
+
+- **Local videos** auto-play muted for 5 seconds when hovered on desktop, then reset to the poster. Clicking opens the full video with controls and audio. Hover preview is skipped on touch devices and when `prefers-reduced-motion: reduce` is set.
+- **YouTube cards** show a static thumbnail with a "YouTube" badge; clicking opens an autoplaying embed in the modal. No hover preview.
+- **Omit `media` entirely** to fall back to the numbered placeholder card (`01`, `02`, …).
+
 **You can:**
 - Add unlimited projects — the grid auto-adjusts (1 col mobile, 2 col tablet, 3 col desktop)
 - Remove projects by deleting entries
 - Reorder by rearranging the array
-- Modify any field (`title`, `tags`, `description`, `note`)
+- Modify any field (`title`, `tags`, `description`, `note`, `link`, `media`)
 
 #### Work Experience
 
@@ -420,7 +440,6 @@ The navbar renders whatever is in the array. The "Start project" button always l
 
 | Feature | Complexity | Suggestion |
 |---------|-----------|------------|
-| **Project images** | Low | Add images to `src/assets/`, set the `image` field in project data, update `ProjectCard.tsx` to render an `<img>` |
 | **Project detail pages** | Medium | Add individual routes in the router, create a `ProjectDetail` page component |
 | **Dark/light mode toggle** | Medium | Add state to toggle between two Tailwind color sets, persist in localStorage |
 | **Blog section** | Medium | Create a new section, or add routes for individual blog posts with markdown support |
