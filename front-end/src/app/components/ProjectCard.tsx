@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Project } from '../data';
+import ProjectMedia from './ProjectMedia';
+import ExternalLinkIcon from './icons/ExternalLinkIcon';
 
 interface ProjectCardProps {
 	project: Project;
@@ -23,6 +25,16 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 		return () => window.removeEventListener('keydown', onKeyDown);
 	}, [isOpen]);
 
+	const openModal = () => setIsOpen(true);
+	const closeModal = () => setIsOpen(false);
+
+	const handleCardKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			openModal();
+		}
+	};
+
 	return (
 		<>
 			<motion.article
@@ -30,27 +42,34 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true, margin: '-60px' }}
 				transition={{ duration: 0.5, delay: index * 0.1 }}
-				onClick={() => setIsOpen(true)}
-				className="group relative overflow-hidden rounded-2xl bg-surface-light cursor-pointer"
+				onClick={openModal}
+				onKeyDown={handleCardKeyDown}
+				role="button"
+				tabIndex={0}
+				aria-label={`Open ${project.title} details`}
+				className="group relative overflow-hidden rounded-2xl bg-surface-light cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
 			>
 				<div className="aspect-[4/3] bg-surface-lighter relative overflow-hidden">
-					{project.image ? (
-						<img
-							src={project.image}
-							alt={project.title}
-							className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-						/>
-					) : (
-						<>
-							<div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-muted/10 group-hover:from-accent/20 group-hover:to-accent-muted/20 transition-all duration-500" />
-							<div className="absolute inset-0 flex items-center justify-center">
-								<span className="font-syne text-4xl md:text-5xl font-bold text-text/10 group-hover:text-text/20 transition-colors duration-500 select-none">
-									{String(index + 1).padStart(2, '0')}
-								</span>
-							</div>
-						</>
+					<ProjectMedia
+						media={project.media}
+						mode="thumb"
+						fallbackIndex={index}
+						title={project.title}
+					/>
+					<div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent opacity-40 group-hover:opacity-55 transition-opacity duration-500 pointer-events-none" />
+
+					{project.link && (
+						<a
+							href={project.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={(e) => e.stopPropagation()}
+							aria-label={`Open ${project.title} in a new tab`}
+							className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-text-muted hover:text-accent transition-colors opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+						>
+							<ExternalLinkIcon className="w-4 h-4" />
+						</a>
 					)}
-					<div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent opacity-40 group-hover:opacity-55 transition-opacity duration-500" />
 				</div>
 
 				<div className="p-6">
@@ -73,7 +92,9 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 						))}
 					</div>
 					{project.note && (
-						<p className="mt-3 text-xs text-accent-muted italic">{project.note}</p>
+						<p className="mt-3 text-xs text-accent-muted italic">
+							{project.note}
+						</p>
 					)}
 				</div>
 			</motion.article>
@@ -85,7 +106,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.25 }}
-						onClick={() => setIsOpen(false)}
+						onClick={closeModal}
 						className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-6 cursor-pointer"
 					>
 						<motion.div
@@ -100,26 +121,23 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 							aria-label={project.title}
 						>
 							<div className="aspect-video bg-surface-lighter relative overflow-hidden">
-								{project.image ? (
-									<img
-										src={project.image}
-										alt={project.title}
-										className="w-full h-full object-cover"
-									/>
-								) : (
-									<div className="absolute inset-0 flex items-center justify-center">
-										<span className="font-syne text-6xl font-bold text-text/10 select-none">
-											{String(index + 1).padStart(2, '0')}
-										</span>
-									</div>
-								)}
-								<div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent opacity-45" />
+								<ProjectMedia
+									media={project.media}
+									mode="full"
+									fallbackIndex={index}
+									title={project.title}
+								/>
+								<div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent opacity-45 pointer-events-none" />
 							</div>
 
 							<div className="p-8">
-								<h3 className="font-syne text-2xl font-bold text-text">{project.title}</h3>
+								<h3 className="font-syne text-2xl font-bold text-text">
+									{project.title}
+								</h3>
 								{project.description && (
-									<p className="mt-3 text-text-muted leading-relaxed">{project.description}</p>
+									<p className="mt-3 text-text-muted leading-relaxed">
+										{project.description}
+									</p>
 								)}
 								<div className="mt-5 flex flex-wrap gap-2">
 									{project.tags.map((tag) => (
@@ -132,13 +150,25 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 									))}
 								</div>
 								{project.note && (
-									<p className="mt-4 text-sm text-accent-muted italic">{project.note}</p>
+									<p className="mt-4 text-sm text-accent-muted italic">
+										{project.note}
+									</p>
+								)}
+								{project.link && (
+									<a
+										href={project.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="mt-5 inline-flex items-center gap-2 text-accent hover:text-text transition-colors"
+									>
+										Visit project <ExternalLinkIcon className="w-4 h-4" />
+									</a>
 								)}
 							</div>
 
 							<button
 								type="button"
-								onClick={() => setIsOpen(false)}
+								onClick={closeModal}
 								className="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-text-muted hover:text-text transition-colors"
 								aria-label="Close project popup"
 							>
