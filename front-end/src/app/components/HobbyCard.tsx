@@ -47,16 +47,22 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 		[carouselEnabled, slideIndex, pauseCurrentSlideVideo]
 	);
 
-	const openModal = () => setIsOpen(true);
+	const openModal = () => {
+		setSlideIndex(0);
+		setSlideDir(0);
+		setIsOpen(true);
+	};
 	const closeModal = useCallback(() => {
 		pauseCurrentSlideVideo();
 		setIsOpen(false);
 	}, [pauseCurrentSlideVideo]);
 
 	useEffect(() => {
-		if (isOpen) {
-			setSlideIndex(0);
-			setSlideDir(0);
+		if (isOpen) return;
+		const v = slideVideoRef.current;
+		if (v) {
+			v.pause();
+			v.currentTime = 0;
 		}
 	}, [isOpen]);
 
@@ -76,9 +82,12 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 	}, [isOpen, carouselEnabled, goPrev, goNext, closeModal]);
 
 	useEffect(() => {
-		const v = slideVideoRef.current;
 		return () => {
-			if (v) v.pause();
+			const v = slideVideoRef.current;
+			if (v) {
+				v.pause();
+				v.currentTime = 0;
+			}
 		};
 	}, []);
 
