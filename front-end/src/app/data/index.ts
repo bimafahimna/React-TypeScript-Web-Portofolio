@@ -36,13 +36,14 @@ export interface NonformalEducation {
 	location?: string;
 }
 
+export type HobbyAsset =
+	| { kind: 'image'; src: string }
+	| { kind: 'video'; src: string; poster?: string };
+
 export interface Hobby {
 	title: string;
 	description: string;
-	/** Cover + default when `images` is omitted */
-	image?: string;
-	/** Multiple photos; first item is used as the grid cover. Carousel only when length > 1. */
-	images?: string[];
+	assets?: HobbyAsset[];
 	span?: 'tall' | 'wide';
 }
 
@@ -102,7 +103,10 @@ export const hobbies: Hobby[] = [
 	{
 		title: 'Diving',
 		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
-		images: ['/hobby/underwater_temple.JPG', '/hobby/uw_selfie.png'],
+		assets: [
+			{ kind: 'image', src: '/hobby/underwater_temple.JPG' },
+			{ kind: 'image', src: '/hobby/uw_selfie.png' },
+		],
 		span: 'wide',
 	},
 ];
