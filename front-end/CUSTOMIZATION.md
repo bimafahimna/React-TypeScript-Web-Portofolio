@@ -52,10 +52,12 @@ front-end/src/
     ├── layouts/MainLayout.tsx        # Composes Navbar + all sections
     ├── data/index.ts                 # ★ ALL your content lives here
     ├── components/
+    │   ├── AnimatedSection.tsx       # Reusable scroll-triggered fade wrapper
+    │   ├── HobbyCard.tsx             # Hobby tile + mixed-media carousel modal
+    │   ├── HobbyMedia.tsx            # Image / local video renderer for hobby slides
     │   ├── Navbar.tsx                # Floating pill navbar + mobile menu
     │   ├── ProjectCard.tsx           # Individual project card, modal, hover preview
     │   ├── ProjectMedia.tsx          # Image / video / YouTube renderer for cards
-    │   ├── AnimatedSection.tsx       # Reusable scroll-triggered fade wrapper
     │   └── icons/
     │       └── ExternalLinkIcon.tsx  # Inline SVG external-link icon
     └── sections/
@@ -130,6 +132,46 @@ media: { kind: 'youtube', videoId: 'dQw4w9WgXcQ' }
 - Remove projects by deleting entries
 - Reorder by rearranging the array
 - Modify any field (`title`, `tags`, `description`, `note`, `link`, `media`)
+
+#### Hobbies
+
+```typescript
+export const hobbies: Hobby[] = [
+  {
+    title: 'My Hobby',
+    description: 'A short line about it.',
+    assets: [
+      { kind: 'image', src: '/hobby/photo1.jpg' },
+      { kind: 'video', src: '/hobby/clip.mp4' }, // local MP4 only
+      { kind: 'image', src: '/hobby/photo2.jpg' },
+    ],
+    span: 'wide', // optional: 'wide' | 'tall'
+  },
+];
+```
+
+**The `assets` field** holds an ordered list of images and self-hosted MP4 videos. Each item is a discriminated union:
+
+```typescript
+// Static image
+{ kind: 'image', src: '/hobby/photo.jpg' }
+
+// Local MP4 (no YouTube). `poster` is optional; without it, the video's first frame is used.
+{ kind: 'video', src: '/hobby/clip.mp4', poster: '/hobby/clip_poster.jpg' }
+```
+
+Behavior:
+
+- The **grid cover** uses the first asset. If it is a video, its `poster` (or first frame) is shown as a static image — no hover playback on the cover.
+- Clicking the tile opens the **carousel modal**. Navigate with the arrows, the dot indicators, or Left/Right arrow keys. Escape closes.
+- **Video slides** autoplay muted with native controls visible. Click the unmute button in the controls for audio. Video pauses and resets when you leave that slide or close the modal.
+- **Single-asset hobbies** work with either kind — no arrows or dots are shown.
+- **Omit `assets`** to fall back to the numbered placeholder tile.
+
+**You can:**
+- Mix any number of images and videos per hobby (order is preserved).
+- Use `span: 'wide'` or `'tall'` to control the tile's grid footprint.
+- Remove or reorder items freely.
 
 #### Work Experience
 
