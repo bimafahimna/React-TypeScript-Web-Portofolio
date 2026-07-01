@@ -61,6 +61,7 @@ export const projects: Project[] = [
 		description:
 			'A modern SaaS Analytics Dashboard built using React and Next.js, featuring interactive data visualization, user-friendly UI, and customizable widgets to help businesses monitor and analyze key metrics effectively.',
 		note: 'Still a work in progress',
+		link: "https://insighthub-xi.vercel.app",
 	},
 ];
 
@@ -104,8 +105,9 @@ export const hobbies: Hobby[] = [
 		title: 'Diving',
 		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
 		assets: [
-			{ kind: 'image', src: '/hobby/underwater_temple.JPG' },
-			{ kind: 'image', src: '/hobby/uw_selfie.png' },
+			{ kind: 'image', src: '/hobby/diving/underwater_temple.JPG' },
+			{ kind: "video", src: '/hobby/diving/underboat.MP4' },
+			{ kind: 'image', src: '/hobby/diving/uw_selfie.png' },
 		],
 		span: 'wide',
 	},

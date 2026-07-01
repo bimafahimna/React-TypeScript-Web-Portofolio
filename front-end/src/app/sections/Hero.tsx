@@ -53,7 +53,7 @@ const Hero = () => {
 					transition={{ duration: 0.6, delay: 0.7 }}
 					className="mt-8 max-w-xl text-subhead text-text-muted"
 				>
-					Building performant, beautiful interfaces for startups and teams
+					Love Building performant, beautiful interfaces for startups and teams
 					who care about the details and quality of work.
 				</motion.p>
 

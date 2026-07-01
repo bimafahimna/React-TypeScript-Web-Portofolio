@@ -15,7 +15,8 @@ const Work = () => {
 						transition={{ duration: 0.5 }}
 						className="font-syne text-headline"
 					>
-						My latest work
+						My latest {' '}
+						<span className="gradient-text">projects</span>
 					</motion.h2>
 					<motion.p
 						initial={{ opacity: 0, y: 20 }}
@@ -24,7 +25,7 @@ const Work = () => {
 						transition={{ duration: 0.5, delay: 0.1 }}
 						className="mt-3 text-text-muted text-lg"
 					>
-						from 2023 &apos;til today
+						A selection of projects I've designed and built
 					</motion.p>
 				</div>
 
