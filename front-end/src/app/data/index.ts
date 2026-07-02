@@ -1,9 +1,15 @@
+export type ProjectMedia =
+	| { kind: 'image'; src: string }
+	| { kind: 'video'; src: string; poster?: string }
+	| { kind: 'youtube'; videoId: string; poster?: string };
+
 export interface Project {
 	title: string;
 	tags: string[];
 	description?: string;
 	note?: string;
-	image?: string;
+	link?: string;
+	media?: ProjectMedia;
 }
 
 export interface Experience {
@@ -30,13 +36,14 @@ export interface NonformalEducation {
 	location?: string;
 }
 
+export type HobbyAsset =
+	| { kind: 'image'; src: string }
+	| { kind: 'video'; src: string; poster?: string };
+
 export interface Hobby {
 	title: string;
 	description: string;
-	/** Cover + default when `images` is omitted */
-	image?: string;
-	/** Multiple photos; first item is used as the grid cover. Carousel only when length > 1. */
-	images?: string[];
+	assets?: HobbyAsset[];
 	span?: 'tall' | 'wide';
 }
 
@@ -48,11 +55,13 @@ export interface SocialLink {
 
 export const projects: Project[] = [
 	{
-		title: "SaaS Analytic Dashboard",
-		tags:["React","TypeScript","Next.JS", "PostgreSQL","Prisma"],
-		image:"/project/SaaS_dashboard.png",
-		description: "A modern SaaS Analytics Dashboard built using React and Next.js, featuring interactive data visualization, user-friendly UI, and customizable widgets to help businesses monitor and analyze key metrics effectively.",
-		note:"Still a work in progress"
+		title: 'SaaS Analytic Dashboard',
+		tags: ['React', 'TypeScript', 'Next.JS', 'PostgreSQL', 'Prisma'],
+		media: { kind: 'image', src: '/project/SaaS_dashboard.png' },
+		description:
+			'A modern SaaS Analytics Dashboard built using React and Next.js, featuring interactive data visualization, user-friendly UI, and customizable widgets to help businesses monitor and analyze key metrics effectively.',
+		note: 'Still a work in progress',
+		link: "https://insighthub-xi.vercel.app",
 	},
 ];
 
@@ -95,7 +104,11 @@ export const hobbies: Hobby[] = [
 	{
 		title: 'Diving',
 		description: 'Exploring the ocean’s depths and discovering marine life through scuba diving.',
-		images: ['/hobby/underwater_temple.JPG', '/hobby/uw_selfie.png'],
+		assets: [
+			{ kind: 'image', src: '/hobby/diving/underwater_temple.JPG' },
+			{ kind: "video", src: '/hobby/diving/underboat.mov' },
+			{ kind: 'image', src: '/hobby/diving/uw_selfie.png' },
+		],
 		span: 'wide',
 	},
 ];
