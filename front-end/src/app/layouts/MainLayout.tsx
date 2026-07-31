@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar';
 import Hero from '../sections/Hero';
+import About from '../sections/About';
 import Work from '../sections/Work';
 import Experience from '../sections/Experience';
 import Story from '../sections/Story';
@@ -14,6 +15,7 @@ const MainLayout = () => {
 			<Navbar />
 			<main>
 				<Hero />
+				<About />
 				<Work />
 				<Experience />
 				<Academic />

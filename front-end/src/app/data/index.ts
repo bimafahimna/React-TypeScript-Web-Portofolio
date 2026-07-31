@@ -120,6 +120,7 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const navLinks = [
+	{ label: 'About', href: '#about' },
 	{ label: 'Work', href: '#work' },
 	{ label: 'Story', href: '#story' },
 	{ label: 'Academic', href: '#academic' },

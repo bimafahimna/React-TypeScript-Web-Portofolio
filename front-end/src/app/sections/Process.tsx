@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion';
-import AnimatedSection from '../components/AnimatedSection';
+import SectionShell from '../components/SectionShell';
+
+// Drop a transparent PNG in /public and set this to its path.
+const processImage: string | undefined = undefined;
 
 const steps = [
 	{
@@ -12,7 +15,7 @@ const steps = [
 		number: '02',
 		title: 'Design & Prototype',
 		description:
-			'From wireframes to high-fidelity mockups, iterate thoughtfully with your feedback baked in.',
+			'From wireframes to high-fidelity mockups, iterating thoughtfully with your feedback baked in.',
 	},
 	{
 		number: '03',
@@ -30,19 +33,39 @@ const steps = [
 
 const Process = () => {
 	return (
-		<AnimatedSection id="process" className="section-padding bg-surface-light">
+		<SectionShell
+			id="process"
+			tint="chartreuse"
+			image={{ src: processImage, placement: 'corner', corner: 'top-right', sizeClassName: 'w-32 md:w-44' }}
+		>
 			<div className="max-w-5xl mx-auto">
-				<motion.h2
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5 }}
-					className="font-syne text-headline mb-16"
-				>
-					What my perfect collab looks like
-				</motion.h2>
+				<div className="mb-14 max-w-2xl">
+					<motion.p
+						initial={{ opacity: 0, y: 10 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.4 }}
+						className="mb-3 inline-flex items-center gap-2 text-accent text-xs font-semibold uppercase tracking-widest"
+					>
+						<span className="h-px w-6 bg-accent/60" />
+						How I work
+					</motion.p>
+					<motion.h2
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.5 }}
+						className="font-syne text-headline"
+					>
+						What my perfect{' '}
+						<span className="bg-gradient-to-r from-accent to-accent-muted bg-clip-text text-transparent">
+							collab
+						</span>{' '}
+						looks like
+					</motion.h2>
+				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					{steps.map((step, i) => (
 						<motion.div
 							key={step.number}
@@ -50,10 +73,19 @@ const Process = () => {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ duration: 0.4, delay: i * 0.1 }}
-							className="group p-8 rounded-2xl bg-surface hover:bg-surface-lighter border border-white/5 hover:border-accent/20 transition-all duration-300"
+							whileHover={{ y: -6 }}
+							className="group relative p-8 rounded-3xl bg-surface-light/70 backdrop-blur-sm border border-text/10 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/10 transition-all duration-300"
 						>
-							<span className="font-mono text-sm text-accent">{step.number}</span>
-							<h3 className="font-syne text-xl font-bold mt-3 mb-3 text-text group-hover:text-accent transition-colors">
+							<div className="flex items-center justify-between mb-3">
+								<span className="inline-flex items-center justify-center h-10 w-10 rounded-2xl bg-accent/10 text-accent font-mono text-sm font-semibold group-hover:bg-accent group-hover:text-text-dark transition-colors">
+									{step.number}
+								</span>
+								<span
+									aria-hidden
+									className="h-1.5 w-1.5 rounded-full bg-accent/40 group-hover:scale-150 group-hover:bg-accent transition-all"
+								/>
+							</div>
+							<h3 className="font-syne text-xl font-bold mb-3 text-text group-hover:text-accent transition-colors">
 								{step.title}
 							</h3>
 							<p className="text-text-muted leading-relaxed">
@@ -63,7 +95,7 @@ const Process = () => {
 					))}
 				</div>
 			</div>
-		</AnimatedSection>
+		</SectionShell>
 	);
 };
 

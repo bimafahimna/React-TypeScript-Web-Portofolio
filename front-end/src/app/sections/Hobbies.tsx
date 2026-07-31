@@ -1,32 +1,50 @@
 import { motion } from 'framer-motion';
 import { hobbies } from '../data';
-import AnimatedSection from '../components/AnimatedSection';
+import SectionShell from '../components/SectionShell';
 import HobbyCard from '../components/HobbyCard';
+
+// Drop a transparent PNG in /public and set this to its path.
+const hobbiesImage: string | undefined = undefined;
 
 const Hobbies = () => {
 	return (
-		<AnimatedSection id="hobbies" className="section-padding">
+		<SectionShell
+			id="hobbies"
+			tint="teal"
+			image={{ src: hobbiesImage, placement: 'corner', corner: 'top-left', sizeClassName: 'w-32 md:w-44' }}
+		>
 			<div className="max-w-7xl mx-auto">
-				<div className="mb-16">
+				<div className="mb-16 max-w-2xl">
+					<motion.p
+						initial={{ opacity: 0, y: 10 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.4 }}
+						className="mb-3 inline-flex items-center gap-2 text-accent text-xs font-semibold uppercase tracking-widest"
+					>
+						<span className="h-px w-6 bg-accent/60" />
+						Off the clock
+					</motion.p>
 					<motion.h2
-						initial={{ opacity: 0, y: 30 }}
+						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.5 }}
 						className="font-syne text-headline"
 					>
-						Beyond the code,
-						<br />
-						<span className="gradient-text">things I enjoy</span>
+						Beyond the code,{' '}
+						<span className="bg-gradient-to-r from-accent to-accent-muted bg-clip-text text-transparent">
+							things I enjoy
+						</span>
 					</motion.h2>
 					<motion.p
-						initial={{ opacity: 0, y: 20 }}
+						initial={{ opacity: 0, y: 10 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.5, delay: 0.1 }}
 						className="mt-3 text-text-muted text-lg"
 					>
-						click to see the full photo
+						Click any card for the full photo.
 					</motion.p>
 				</div>
 
@@ -36,7 +54,7 @@ const Hobbies = () => {
 					))}
 				</div>
 			</div>
-		</AnimatedSection>
+		</SectionShell>
 	);
 };
 
