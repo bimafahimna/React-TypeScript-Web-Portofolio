@@ -42,25 +42,16 @@ const HobbyMedia = forwardRef<HTMLVideoElement, HobbyMediaProps>(
 			);
 		}
 
-		if (asset.poster) {
-			return (
-				<img
-					src={asset.poster}
-					alt={alt}
-					className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-				/>
-			);
-		}
-
-		const posterSrc = asset.src.includes('#') ? asset.src : `${asset.src}#t=0.1`;
-
 		return (
 			<video
-				src={posterSrc}
+				src={asset.src}
+				poster={asset.poster}
+				autoPlay
+				loop
 				muted
 				playsInline
 				preload="metadata"
-				aria-hidden="true"
+				aria-label={alt}
 				className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
 			/>
 		);
