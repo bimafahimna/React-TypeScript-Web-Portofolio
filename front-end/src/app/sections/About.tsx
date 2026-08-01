@@ -14,7 +14,7 @@ const highlights = [
 		text: "Software that feels considered and human, not just functional. The kind you don't need a tutorial for. Details matter, like spacing, motion, and the way a button reacts under your finger.",
 	},
 	{
-		label: 'Where I\u2019m headed',
+		label: "Where I'm headed",
 		text: "Keep sharpening the craft, ship products people actually enjoy using, and eventually build things that make life a little easier for the coastal communities I grew up around.",
 	},
 ];

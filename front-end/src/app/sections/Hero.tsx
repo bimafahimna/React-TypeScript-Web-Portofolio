@@ -1,13 +1,25 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import PhotoFrame from '../components/PhotoFrame';
+import WordCarousel from '../components/WordCarousel';
 
 // ---------------------------------------------------------------------------
 // Drop your photo in /public (e.g. /public/me.jpg) and set `photoSrc` below.
 // Leave it `undefined` to keep the "BF" initials placeholder.
 // Switch `frameShape` to 'circle' for a classic avatar look.
 // ---------------------------------------------------------------------------
-const photoSrc: string | undefined = undefined;
+const photoSrc: string | undefined = '/hero/self_foto.png';
 const frameShape: 'circle' | 'rectangle' = 'rectangle';
+
+// Words that describe you. Rotate through in the hero. Edit freely.
+const descriptorWords = [
+	'developer',
+	'engineer',
+	'builder',
+	'problem solver',
+	'design nerd',
+	'coffee enthusiast',
+	'ocean lover',
+];
 
 const Hero = () => {
 	const prefersReducedMotion = useReducedMotion();
@@ -67,7 +79,7 @@ const Hero = () => {
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, delay: 0.2 }}
-						className="text-accent text-subhead mb-3"
+						className="text-accent text-subhead mb-2"
 					>
 						Hi, I'm Bima{' '}
 						<span role="img" aria-label="waving hand">
@@ -75,8 +87,22 @@ const Hero = () => {
 						</span>
 					</motion.p>
 
+					<motion.p
+						initial={{ opacity: 0, y: 10 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5, delay: 0.28 }}
+						className="mb-5 text-text-muted text-lg md:text-xl"
+					>
+						I'm{' '}
+						<WordCarousel
+							words={descriptorWords}
+							interval={2400}
+							className="font-syne font-semibold bg-gradient-to-r from-accent to-accent-muted bg-clip-text text-transparent"
+						/>
+					</motion.p>
+
 					{/*
-					  Short who-am-I. Edit to sound like you — keep it to a
+					  Short who-am-I. Edit to sound like you, keep it to a
 					  sentence or two so the hero stays simple.
 					*/}
 					<motion.p

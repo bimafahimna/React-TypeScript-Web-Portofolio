@@ -87,9 +87,8 @@ const Story = () => {
 							transition={{ duration: 0.5, delay: 0.4 }}
 							className="text-lg text-text leading-relaxed font-medium"
 						>
-							Today, I&apos;m an Engineer at Tiket, writing production code for
-							millions of users across Indonesia, and still learning and
-							growing every day.
+							Today, I'm an Engineer at Tiket, writing production code that helps millions of users plan
+							their trips more easily, and I'm still learning, improving, and growing every day.
 						</motion.p>
 					</div>
 				</div>
