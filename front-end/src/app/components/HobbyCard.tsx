@@ -1,58 +1,95 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Hobby } from '../data';
-
-function hobbyImageList(hobby: Hobby): string[] {
-	if (hobby.images?.length) return hobby.images;
-	if (hobby.image) return [hobby.image];
-	return [];
-}
+import HobbyMedia from './HobbyMedia';
 
 const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [slideIndex, setSlideIndex] = useState(0);
 	const [slideDir, setSlideDir] = useState(0);
+	const slideVideoRef = useRef<HTMLVideoElement | null>(null);
 
-	const images = hobbyImageList(hobby);
-	const coverSrc = images[0];
-	const carouselEnabled = images.length > 1;
+	const assets = hobby.assets ?? [];
+	const coverAsset = assets[0];
+	const carouselEnabled = assets.length > 1;
+	const currentAsset = assets[slideIndex];
+
+	const pauseCurrentSlideVideo = useCallback(() => {
+		const v = slideVideoRef.current;
+		if (v) {
+			v.pause();
+			v.currentTime = 0;
+		}
+	}, []);
 
 	const goNext = useCallback(() => {
 		if (!carouselEnabled) return;
+		pauseCurrentSlideVideo();
 		setSlideDir(1);
-		setSlideIndex((i) => (i + 1) % images.length);
-	}, [carouselEnabled, images.length]);
+		setSlideIndex((i) => (i + 1) % assets.length);
+	}, [carouselEnabled, assets.length, pauseCurrentSlideVideo]);
 
 	const goPrev = useCallback(() => {
 		if (!carouselEnabled) return;
+		pauseCurrentSlideVideo();
 		setSlideDir(-1);
-		setSlideIndex((i) => (i - 1 + images.length) % images.length);
-	}, [carouselEnabled, images.length]);
+		setSlideIndex((i) => (i - 1 + assets.length) % assets.length);
+	}, [carouselEnabled, assets.length, pauseCurrentSlideVideo]);
+
+	const goTo = useCallback(
+		(i: number) => {
+			if (!carouselEnabled) return;
+			if (i === slideIndex) return;
+			pauseCurrentSlideVideo();
+			setSlideDir(i > slideIndex ? 1 : -1);
+			setSlideIndex(i);
+		},
+		[carouselEnabled, slideIndex, pauseCurrentSlideVideo]
+	);
+
+	const openModal = () => {
+		setSlideIndex(0);
+		setSlideDir(0);
+		setIsOpen(true);
+	};
+	const closeModal = useCallback(() => {
+		pauseCurrentSlideVideo();
+		setIsOpen(false);
+	}, [pauseCurrentSlideVideo]);
 
 	useEffect(() => {
-		if (isOpen) {
-			setSlideIndex(0);
-			setSlideDir(0);
+		if (isOpen) return;
+		const v = slideVideoRef.current;
+		if (v) {
+			v.pause();
+			v.currentTime = 0;
 		}
 	}, [isOpen]);
 
 	useEffect(() => {
 		if (!isOpen) return;
 		const onKey = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') setIsOpen(false);
+			if (e.key === 'Escape') {
+				closeModal();
+				return;
+			}
 			if (!carouselEnabled) return;
-			if (e.key === 'ArrowLeft') {
-				setSlideDir(-1);
-				setSlideIndex((i) => (i - 1 + images.length) % images.length);
-			}
-			if (e.key === 'ArrowRight') {
-				setSlideDir(1);
-				setSlideIndex((i) => (i + 1) % images.length);
-			}
+			if (e.key === 'ArrowLeft') goPrev();
+			if (e.key === 'ArrowRight') goNext();
 		};
 		window.addEventListener('keydown', onKey);
 		return () => window.removeEventListener('keydown', onKey);
-	}, [isOpen, carouselEnabled, images.length]);
+	}, [isOpen, carouselEnabled, goPrev, goNext, closeModal]);
+
+	useEffect(() => {
+		return () => {
+			const v = slideVideoRef.current;
+			if (v) {
+				v.pause();
+				v.currentTime = 0;
+			}
+		};
+	}, []);
 
 	const slideVariants = {
 		enter: (dir: number) => ({
@@ -66,6 +103,8 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 		}),
 	};
 
+	const slideAltFor = (i: number) => `${hobby.title}, ${i + 1} of ${assets.length}`;
+
 	return (
 		<>
 			<motion.div
@@ -73,7 +112,7 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true, margin: '-60px' }}
 				transition={{ duration: 0.5, delay: index * 0.1 }}
-				onClick={() => setIsOpen(true)}
+				onClick={openModal}
 				className={`group relative overflow-hidden rounded-2xl cursor-pointer ${hobby.span === 'tall'
 						? 'row-span-2'
 						: hobby.span === 'wide'
@@ -85,12 +124,8 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 					className={`relative w-full bg-surface-lighter overflow-hidden ${hobby.span === 'tall' ? 'h-full min-h-[420px]' : 'aspect-[4/3]'
 						}`}
 				>
-					{coverSrc ? (
-						<img
-							src={coverSrc}
-							alt={hobby.title}
-							className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-						/>
+					{coverAsset ? (
+						<HobbyMedia asset={coverAsset} mode="cover" alt={hobby.title} />
 					) : (
 						<div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent-muted/10 group-hover:from-accent/20 group-hover:to-accent-muted/20 transition-all duration-500" />
 					)}
@@ -118,7 +153,7 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.3 }}
-						onClick={() => setIsOpen(false)}
+						onClick={closeModal}
 						className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-6 cursor-pointer"
 					>
 						<motion.div
@@ -138,7 +173,7 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 									? { role: 'region', 'aria-roledescription': 'carousel' as const }
 									: {})}
 							>
-								{images.length === 0 ? (
+								{assets.length === 0 ? (
 									<div className="absolute inset-0 flex items-center justify-center">
 										<span className="font-syne text-6xl font-bold text-text/10 select-none">
 											{String(index + 1).padStart(2, '0')}
@@ -147,18 +182,25 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 								) : carouselEnabled ? (
 									<>
 										<AnimatePresence initial={false} custom={slideDir} mode="popLayout">
-											<motion.img
+											<motion.div
 												key={slideIndex}
-												src={images[slideIndex]}
-												alt={`${hobby.title} — ${slideIndex + 1} of ${images.length}`}
 												custom={slideDir}
 												variants={slideVariants}
 												initial="enter"
 												animate="center"
 												exit="exit"
 												transition={{ type: 'tween', duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
-												className="absolute inset-0 w-full h-full object-cover"
-											/>
+												className="absolute inset-0"
+											>
+												<HobbyMedia
+													ref={(el) => {
+														if (el) slideVideoRef.current = el;
+													}}
+													asset={currentAsset}
+													mode="slide"
+													alt={slideAltFor(slideIndex)}
+												/>
+											</motion.div>
 										</AnimatePresence>
 										<button
 											type="button"
@@ -167,7 +209,7 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 												goPrev();
 											}}
 											className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-text-muted hover:text-text transition-colors"
-											aria-label="Previous image"
+											aria-label="Previous slide"
 										>
 											‹
 										</button>
@@ -178,33 +220,35 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 												goNext();
 											}}
 											className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-text-muted hover:text-text transition-colors"
-											aria-label="Next image"
+											aria-label="Next slide"
 										>
 											›
 										</button>
 										<div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
-											{images.map((_, i) => (
+											{assets.map((_, i) => (
 												<button
 													key={i}
 													type="button"
 													onClick={(e) => {
 														e.stopPropagation();
-														setSlideDir(i > slideIndex ? 1 : -1);
-														setSlideIndex(i);
+														goTo(i);
 													}}
 													className={`h-1.5 rounded-full transition-all ${i === slideIndex ? 'w-6 bg-text' : 'w-1.5 bg-text/35 hover:bg-text/50'
 														}`}
-													aria-label={`Go to image ${i + 1}`}
+													aria-label={`Go to slide ${i + 1}`}
 													{...(i === slideIndex ? { 'aria-current': true as const } : {})}
 												/>
 											))}
 										</div>
 									</>
 								) : (
-									<img
-										src={images[0]}
+									<HobbyMedia
+										ref={(el) => {
+											if (el) slideVideoRef.current = el;
+										}}
+										asset={currentAsset}
+										mode="slide"
 										alt={hobby.title}
-										className="w-full h-full object-cover"
 									/>
 								)}
 							</div>
@@ -217,8 +261,8 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 								</p>
 							</div>
 							<button
-								onClick={() => setIsOpen(false)}
-								className="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-text-muted hover:text-text transition-colors"
+								onClick={closeModal}
+								className="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-text-muted hover:text-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
 								aria-label="Close"
 							>
 								&times;

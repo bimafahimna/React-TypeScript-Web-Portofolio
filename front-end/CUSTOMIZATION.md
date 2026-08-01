@@ -52,9 +52,14 @@ front-end/src/
     ├── layouts/MainLayout.tsx        # Composes Navbar + all sections
     ├── data/index.ts                 # ★ ALL your content lives here
     ├── components/
+    │   ├── AnimatedSection.tsx       # Reusable scroll-triggered fade wrapper
+    │   ├── HobbyCard.tsx             # Hobby tile + mixed-media carousel modal
+    │   ├── HobbyMedia.tsx            # Image / local video renderer for hobby slides
     │   ├── Navbar.tsx                # Floating pill navbar + mobile menu
-    │   ├── ProjectCard.tsx           # Individual project card with hover effects
-    │   └── AnimatedSection.tsx       # Reusable scroll-triggered fade wrapper
+    │   ├── ProjectCard.tsx           # Individual project card, modal, hover preview
+    │   ├── ProjectMedia.tsx          # Image / video / YouTube renderer for cards
+    │   └── icons/
+    │       └── ExternalLinkIcon.tsx  # Inline SVG external-link icon
     └── sections/
         ├── Hero.tsx                  # Full-screen intro with tagline & CTAs
         ├── Work.tsx                  # Project portfolio grid
@@ -96,17 +101,77 @@ export const projects: Project[] = [
     tags: ['React', 'TypeScript'],      // Technology/category tags
     description: 'What this project does...', // Short summary (optional)
     note: 'Built at Company X',         // Extra context shown in italic (optional)
-    image: '/path/to/screenshot.png',   // Image path (optional, not wired to UI yet)
+    link: 'https://myproject.com',      // External URL (optional; shows link icon on card)
+    media: { kind: 'image', src: '/project/screenshot.png' }, // See below (optional)
   },
   // Add, remove, or reorder entries freely
 ];
 ```
 
+**The `media` field** is a discriminated union — set exactly one of these shapes:
+
+```typescript
+// Static image
+media: { kind: 'image', src: '/project/screenshot.png' }
+
+// Self-hosted MP4 in public/project/
+// `poster` is optional; if omitted, the video's first frame is used
+media: { kind: 'video', src: '/project/demo.mp4', poster: '/project/demo_poster.jpg' }
+
+// YouTube embed (use the video ID from the URL, not the full URL)
+// `poster` overrides the auto-fetched YouTube thumbnail
+media: { kind: 'youtube', videoId: 'dQw4w9WgXcQ' }
+```
+
+- **Local videos** auto-play muted for 5 seconds when hovered on desktop, then reset to the poster. Clicking opens the full video with controls and audio. Hover preview is skipped on touch devices and when `prefers-reduced-motion: reduce` is set.
+- **YouTube cards** show a static thumbnail with a "YouTube" badge; clicking opens an autoplaying embed in the modal. No hover preview.
+- **Omit `media` entirely** to fall back to the numbered placeholder card (`01`, `02`, …).
+
 **You can:**
 - Add unlimited projects — the grid auto-adjusts (1 col mobile, 2 col tablet, 3 col desktop)
 - Remove projects by deleting entries
 - Reorder by rearranging the array
-- Modify any field (`title`, `tags`, `description`, `note`)
+- Modify any field (`title`, `tags`, `description`, `note`, `link`, `media`)
+
+#### Hobbies
+
+```typescript
+export const hobbies: Hobby[] = [
+  {
+    title: 'My Hobby',
+    description: 'A short line about it.',
+    assets: [
+      { kind: 'image', src: '/hobby/photo1.jpg' },
+      { kind: 'video', src: '/hobby/clip.mp4' }, // local MP4 only
+      { kind: 'image', src: '/hobby/photo2.jpg' },
+    ],
+    span: 'wide', // optional: 'wide' | 'tall'
+  },
+];
+```
+
+**The `assets` field** holds an ordered list of images and self-hosted MP4 videos. Each item is a discriminated union:
+
+```typescript
+// Static image
+{ kind: 'image', src: '/hobby/photo.jpg' }
+
+// Local MP4 (no YouTube). `poster` is optional; without it, the video's first frame is used.
+{ kind: 'video', src: '/hobby/clip.mp4', poster: '/hobby/clip_poster.jpg' }
+```
+
+Behavior:
+
+- The **grid cover** uses the first asset. If it is a video, its `poster` (or first frame) is shown as a static image — no hover playback on the cover.
+- Clicking the tile opens the **carousel modal**. Navigate with the arrows, the dot indicators, or Left/Right arrow keys. Escape closes.
+- **Video slides** autoplay muted with native controls visible. Click the unmute button in the controls for audio. Video pauses and resets when you leave that slide or close the modal.
+- **Single-asset hobbies** work with either kind — no arrows or dots are shown.
+- **Omit `assets`** to fall back to the numbered placeholder tile.
+
+**You can:**
+- Mix any number of images and videos per hobby (order is preserved).
+- Use `span: 'wide'` or `'tall'` to control the tile's grid footprint.
+- Remove or reorder items freely.
 
 #### Work Experience
 
@@ -420,7 +485,6 @@ The navbar renders whatever is in the array. The "Start project" button always l
 
 | Feature | Complexity | Suggestion |
 |---------|-----------|------------|
-| **Project images** | Low | Add images to `src/assets/`, set the `image` field in project data, update `ProjectCard.tsx` to render an `<img>` |
 | **Project detail pages** | Medium | Add individual routes in the router, create a `ProjectDetail` page component |
 | **Dark/light mode toggle** | Medium | Add state to toggle between two Tailwind color sets, persist in localStorage |
 | **Blog section** | Medium | Create a new section, or add routes for individual blog posts with markdown support |
