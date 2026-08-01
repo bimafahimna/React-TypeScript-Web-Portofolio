@@ -1,14 +1,14 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import PhotoFrame from '../components/PhotoFrame';
 import WordCarousel from '../components/WordCarousel';
+import { HERO_FRAME_SHAPE, HERO_PHOTO_SRC } from '../data/hero';
 
 // ---------------------------------------------------------------------------
-// Drop your photo in /public (e.g. /public/me.jpg) and set `photoSrc` below.
-// Leave it `undefined` to keep the "BF" initials placeholder.
-// Switch `frameShape` to 'circle' for a classic avatar look.
+// The photo source + frame shape live in ../data/hero so the preload gate in
+// MainLayout can wait on the same URL that the Hero renders.
 // ---------------------------------------------------------------------------
-const photoSrc: string | undefined = '/hero/self_foto.png';
-const frameShape: 'circle' | 'rectangle' = 'rectangle';
+const photoSrc: string | undefined = HERO_PHOTO_SRC;
+const frameShape: 'circle' | 'rectangle' = HERO_FRAME_SHAPE;
 
 // Words that describe you. Rotate through in the hero. Edit freely.
 const descriptorWords = [
