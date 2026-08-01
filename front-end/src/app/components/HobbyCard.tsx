@@ -103,7 +103,7 @@ const HobbyCard = ({ hobby, index }: { hobby: Hobby; index: number }) => {
 		}),
 	};
 
-	const slideAltFor = (i: number) => `${hobby.title} — ${i + 1} of ${assets.length}`;
+	const slideAltFor = (i: number) => `${hobby.title}, ${i + 1} of ${assets.length}`;
 
 	return (
 		<>
