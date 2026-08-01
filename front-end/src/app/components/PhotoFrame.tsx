@@ -60,6 +60,9 @@ const PhotoFrame = ({
 						src={src}
 						alt={alt}
 						onError={() => setFailed(true)}
+						loading="eager"
+						decoding="async"
+						{...({ fetchpriority: 'high' } as Record<string, string>)}
 						className="w-full h-full object-cover"
 					/>
 				) : (

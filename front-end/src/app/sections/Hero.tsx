@@ -69,7 +69,10 @@ const Hero = () => {
 						transition={{ duration: 0.5, delay: 0.2 }}
 						className="text-accent text-subhead mb-3"
 					>
-						Hi, I'm Bima
+						Hi, I'm Bima{' '}
+						<span role="img" aria-label="waving hand">
+							👋
+						</span>
 					</motion.p>
 
 					{/*
@@ -137,7 +140,7 @@ const Hero = () => {
 							src={photoSrc}
 							initials="BF"
 							shape={frameShape}
-							alt="Bima — web developer in Jakarta"
+							alt="Bima, web developer in Jakarta"
 						/>
 					</motion.div>
 				</motion.div>

@@ -58,8 +58,8 @@ const Story = () => {
 							className="text-lg text-text-muted leading-relaxed"
 						>
 							But alongside my studies, I was always drawn to programming.
-							What started as self-taught curiosity — building small tools for
-							my daily use — gradually grew into something I couldn&apos;t
+							What started as self-taught curiosity, building small tools for
+							my daily use, gradually grew into something I couldn&apos;t
 							ignore: a genuine passion for software engineering.
 						</motion.p>
 					</div>
@@ -72,11 +72,12 @@ const Story = () => {
 							transition={{ duration: 0.5, delay: 0.3 }}
 							className="text-lg text-text-muted leading-relaxed"
 						>
-							After graduating, I went all-in on the transition — structured
-							courses, real-world projects, and hands-on internships, including
-							at Shopee. My science background shaped the way I think: I
-							approach engineering challenges with the same methodical,
-							analytical mindset I once applied to ocean data.
+							After graduating, I went all-in on the transition, taking
+							structured courses, working on real-world projects, and gaining
+							hands-on experience through internships, including at Shopee. My
+							science background shaped the way I think: I approach engineering
+							challenges with the same methodical, analytical mindset I once
+							applied to ocean data.
 						</motion.p>
 
 						<motion.p
@@ -87,7 +88,7 @@ const Story = () => {
 							className="text-lg text-text leading-relaxed font-medium"
 						>
 							Today, I&apos;m an Engineer at Tiket, writing production code for
-							millions of users across Indonesia — and still learning and
+							millions of users across Indonesia, and still learning and
 							growing every day.
 						</motion.p>
 					</div>

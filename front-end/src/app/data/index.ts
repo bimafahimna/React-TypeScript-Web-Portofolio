@@ -69,7 +69,7 @@ export const experiences: Experience[] = [
 	{
 		company: 'Tiket.com',
 		role: 'Backend Engineer',
-		period: '2024 — Present',
+		period: '2024 - Present',
 		location: 'Jakarta, Indonesia',
 	},
 	{
@@ -85,7 +85,7 @@ export const formalEducation: FormalEducation[] = [
 		institution: 'Bandung Institute of Technology',
 		degree: 'Bachelor of Science',
 		field: 'Oceanography',
-		period: '2019 — 2023',
+		period: '2019 - 2023',
 		gpa: '3.21 / 4.00',
 		location: 'Bandung, Indonesia',
 	},
@@ -127,4 +127,38 @@ export const navLinks = [
 	{ label: 'Hobbies', href: '#hobbies' },
 	{ label: 'Process', href: '#process' },
 	{ label: 'Connect', href: '#connect' },
+];
+
+// ---------------------------------------------------------------------------
+// Per-section media assets (images + videos), ordered top-to-bottom to match
+// MainLayout. The <ImagePreloader> uses this to cache-warm sections that are
+// within a couple of scrolls of what the user is currently reading. Add any
+// extra paths you drop into /public to the appropriate section here.
+// ---------------------------------------------------------------------------
+export const sectionAssets: { id: string; urls: string[] }[] = [
+	{ id: 'hero', urls: [] },
+	{ id: 'about', urls: [] },
+	{
+		id: 'work',
+		urls: projects.flatMap((p) => {
+			if (!p.media) return [];
+			if (p.media.kind === 'image') return [p.media.src];
+			if (p.media.kind === 'video')
+				return p.media.poster ? [p.media.src, p.media.poster] : [p.media.src];
+			return [];
+		}),
+	},
+	{ id: 'experience', urls: [] },
+	{ id: 'academic', urls: [] },
+	{ id: 'story', urls: [] },
+	{
+		id: 'hobbies',
+		urls: hobbies.flatMap((h) =>
+			(h.assets ?? []).flatMap((a) =>
+				a.kind === 'video' && a.poster ? [a.src, a.poster] : [a.src]
+			)
+		),
+	},
+	{ id: 'process', urls: [] },
+	{ id: 'connect', urls: [] },
 ];

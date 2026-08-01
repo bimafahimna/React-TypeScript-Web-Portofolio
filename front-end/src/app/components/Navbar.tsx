@@ -18,11 +18,10 @@ const Navbar = () => {
 				initial={{ y: -80 }}
 				animate={{ y: 0 }}
 				transition={{ duration: 0.6, ease: 'easeOut' }}
-				className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-3 py-2 rounded-pill transition-all duration-300 ${
-					scrolled
+				className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-3 py-2 rounded-pill transition-all duration-300 ${scrolled
 						? 'bg-surface-light/90 backdrop-blur-xl shadow-lg shadow-black/20'
 						: 'bg-surface-light/60 backdrop-blur-md'
-				}`}
+					}`}
 			>
 				<a
 					href="#hero"
@@ -45,7 +44,7 @@ const Navbar = () => {
 
 				<a
 					href="#connect"
-					className="hidden md:block px-5 py-2 text-sm font-medium bg-accent text-text-dark rounded-pill hover:bg-accent-warm transition-colors"
+					className="hidden md:inline-flex items-center whitespace-nowrap px-4 py-1.5 text-sm font-medium bg-accent text-text-dark rounded-pill hover:bg-accent-warm transition-colors"
 				>
 					Start project
 				</a>

@@ -7,11 +7,11 @@ const aboutImage: string | undefined = undefined;
 const highlights = [
 	{
 		label: 'What I love',
-		text: 'The moment a fuzzy idea clicks into working software — a UI that feels right, an API that returns exactly what it should. That small satisfaction, over and over.',
+		text: 'The moment a fuzzy idea clicks into working software, a UI that feels right, an API that returns exactly what it should. That small satisfaction, over and over.',
 	},
 	{
 		label: 'What I care about',
-		text: "Software that feels considered and human, not just functional. The kind you don't need a tutorial for. Details matter — spacing, motion, the way a button reacts under your finger.",
+		text: "Software that feels considered and human, not just functional. The kind you don't need a tutorial for. Details matter, like spacing, motion, and the way a button reacts under your finger.",
 	},
 	{
 		label: 'Where I\u2019m headed',
@@ -63,7 +63,7 @@ const About = () => {
 					transition={{ duration: 0.5, delay: 0.1 }}
 					className="max-w-2xl text-lg text-text-muted leading-relaxed mb-14"
 				>
-					I fell into software the way most people fall into hobbies —
+					I fell into software the way most people fall into hobbies,
 					accidentally, and then all at once. Along the way it turned into
 					something I care a lot about.
 				</motion.p>

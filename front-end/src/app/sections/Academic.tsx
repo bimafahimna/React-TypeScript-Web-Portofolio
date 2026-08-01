@@ -90,7 +90,7 @@ const Academic = () => {
 					transition={{ duration: 0.5, delay: 0.1 }}
 					className="text-text-muted text-lg mb-14"
 				>
-					A little formal, a little self-taught — always curious.
+					A little formal, a little self-taught, always curious.
 				</motion.p>
 
 				<motion.h3
@@ -107,7 +107,7 @@ const Academic = () => {
 						<Row
 							key={item.institution}
 							title={item.institution}
-							subtitle={`${item.degree} — ${item.field}`}
+							subtitle={`${item.degree}, ${item.field}`}
 							extra={item.gpa ? `GPA: ${item.gpa}` : undefined}
 							location={item.location}
 							period={item.period}

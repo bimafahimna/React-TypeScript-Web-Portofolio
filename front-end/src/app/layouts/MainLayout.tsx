@@ -1,4 +1,6 @@
 import Navbar from '../components/Navbar';
+import ImagePreloader from '../components/ImagePreloader';
+import { sectionAssets } from '../data';
 import Hero from '../sections/Hero';
 import About from '../sections/About';
 import Work from '../sections/Work';
@@ -13,6 +15,7 @@ const MainLayout = () => {
 	return (
 		<div className="relative">
 			<Navbar />
+			<ImagePreloader sections={sectionAssets} radius={2} />
 			<main>
 				<Hero />
 				<About />

@@ -45,7 +45,7 @@ const Connect = () => {
 					transition={{ duration: 0.5, delay: 0.1 }}
 					className="text-text-muted text-lg mb-10"
 				>
-					Tap the button, drop me a line — I read everything.
+					Tap the button, drop me a line, I read everything.
 				</motion.p>
 
 				<motion.a
