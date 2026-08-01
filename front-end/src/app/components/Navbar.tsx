@@ -18,14 +18,14 @@ const Navbar = () => {
 				initial={{ y: -80 }}
 				animate={{ y: 0 }}
 				transition={{ duration: 0.6, ease: 'easeOut' }}
-				className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-3 py-2 rounded-pill transition-all duration-300 ${scrolled
+				className={`fixed top-4 left-1/2 -translate-x-1/2 -ml-8 z-50 flex items-center gap-1 h-14 pl-2 pr-2 rounded-pill transition-all duration-300 ${scrolled
 						? 'bg-surface-light/90 backdrop-blur-xl shadow-lg shadow-black/20'
 						: 'bg-surface-light/60 backdrop-blur-md'
 					}`}
 			>
 				<a
 					href="#hero"
-					className="font-syne font-bold text-lg text-text px-3 hover:text-accent transition-colors"
+					className="inline-flex items-center h-10 px-3 font-syne font-bold text-lg leading-none text-text hover:text-accent transition-colors"
 				>
 					B.
 				</a>
@@ -35,7 +35,7 @@ const Navbar = () => {
 						<a
 							key={link.href}
 							href={link.href}
-							className="px-4 py-2 text-sm text-text-muted hover:text-text transition-colors rounded-pill hover:bg-white/5"
+							className="inline-flex items-center h-10 px-4 text-sm leading-none text-text-muted hover:text-text transition-colors rounded-pill hover:bg-white/5"
 						>
 							{link.label}
 						</a>
@@ -44,14 +44,14 @@ const Navbar = () => {
 
 				<a
 					href="#connect"
-					className="hidden md:inline-flex items-center whitespace-nowrap px-4 py-1.5 text-sm font-medium bg-accent text-text-dark rounded-pill hover:bg-accent-warm transition-colors"
+					className="hidden md:inline-flex items-center h-10 px-4 ml-1 whitespace-nowrap text-sm font-medium leading-none bg-accent text-text-dark rounded-pill hover:bg-accent-warm transition-colors"
 				>
 					Start project
 				</a>
 
 				<button
 					onClick={() => setMenuOpen(!menuOpen)}
-					className="md:hidden px-3 py-2 text-sm text-text-muted hover:text-text transition-colors"
+					className="md:hidden inline-flex items-center h-10 px-3 text-sm leading-none text-text-muted hover:text-text transition-colors"
 					aria-label="Toggle menu"
 				>
 					{menuOpen ? 'Close' : 'Menu'}
